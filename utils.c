@@ -6,7 +6,7 @@
 /*   By: mel-moun <mel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:34:45 by mel-moun          #+#    #+#             */
-/*   Updated: 2023/03/30 12:16:46 by mel-moun         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:59:47 by mel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,20 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 
 void	mouvements(int x, int y, t_map *all)
 {
+	static int	num;
+
 	all->x += x;
 	all->y += y;
+	++num;
+	ft_putnbr_fd(num);
+	ft_putchar_fd('\n');
 	mlx_delete_image(all->mlx, all->player1);
 	all->player1 = mlx_texture_to_image(all->mlx, all->player);
 	if (!all->player1)
+	{
+		free_map(all);
 		mlx_close_window(all->mlx);
+	}
 	check(all, all->player1, all->x, all->y);
 	collectibales(all, x, y);
 }

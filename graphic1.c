@@ -6,7 +6,7 @@
 /*   By: mel-moun <mel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:41 by mel-moun          #+#    #+#             */
-/*   Updated: 2023/03/30 12:32:46 by mel-moun         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:39:43 by mel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,25 @@ int	exitposition(t_map *all, int x, int y)
 
 void	coor(t_map *all, int x, int y)
 {
-	int	i;
-
-	if (mlx_image_to_window(all->mlx, all->free1, x, y) < 0)
+	if (mlx_image_to_window(all->mlx, all->free1, x * 90, y * 90) < 0)
 	{
 		perror("Error\n");
-		i = 0;
-		while (all->map[i++])
-			free(all->map[i]);
-		free(all->map);
 		mlx_close_window(all->mlx);
 	}
+	mlx_delete_image(all->mlx, all->player1);
+	all->player1 = mlx_texture_to_image(all->mlx, all->player);
+	if (!all->player1)
+		mlx_close_window(all->mlx);
+	check(all, all->player1, all->x, all->y);
 }
 
 void	allcollec(t_map *all, int x, int y)
 {
-	if (all->collec == 0 && exitposition(all, x, y))
+	if (!all->collec && exitposition(all, x, y))
+	{
+		write(1, "YOU WON, YOUPI\n", 15);
 		mlx_close_window(all->mlx);
+	}
 }
 
 void	collectibales(t_map *all, int x, int y)
@@ -49,25 +51,25 @@ void	collectibales(t_map *all, int x, int y)
 	{
 		all->map[(all->y + y) / 90][(all->x + x) / 90] = '0';
 		all->collec--;
-		coor(all, (all->x + x) / 90 * 90, (all->y + y) / 90 * 90);
+		coor(all, (all->x + x) / 90, (all->y + y) / 90);
 	}
 	else if (all->map[(all->y + 89 + y) / 90][(all->x + 89 + x) / 90] == 'C')
 	{
 		all->map[(all->y + 89 + y) / 90][(all->x + 89 + x) / 90] = '0';
 		all->collec--;
-		coor(all, (all->x + 89 + x) / 90 * 90, (all->y + 89 + y) / 90 * 90);
+		coor(all, (all->x + 89 + x) / 90, (all->y + 89 + y) / 90);
 	}
 	else if (all->map[(all->y + 89 + y) / 90][(all->x + x) / 90] == 'C')
 	{
 		all->map[(all->y + 89 + y) / 90][(all->x + x) / 90] = '0';
 		all->collec--;
-		coor(all, (all->x + x) / 90 * 90, (all->y + 89 + y) / 90 * 90);
+		coor(all, (all->x + x) / 90, (all->y + 89 + y) / 90);
 	}
 	else if (all->map[(all->y + y) / 90][(all->x + 89 + x) / 90] == 'C')
 	{
 		all->map[(all->y + y) / 90][(all->x + 89 + x) / 90] = '0';
 		all->collec--;
-		coor(all, (all->x + 89 + x) / 90 * 90, (all->y + y) / 90 * 90);
+		coor(all, (all->x + 89 + x) / 90, (all->y + y) / 90);
 	}
 	allcollec(all, x, y);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-moun <mel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:36:57 by mel-moun          #+#    #+#             */
-/*   Updated: 2023/03/30 12:42:03 by mel-moun         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:16:19 by mel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_needs{
 	mlx_image_t		*wall1;
 	mlx_image_t		*free1;
 	mlx_image_t		*exit1;
+	mlx_image_t		*bonus;
 }	t_map;
 
 char	**ft_split(char *s, char c);
@@ -69,8 +70,7 @@ void	loadimages(t_map *all);
 void	check(t_map *all, mlx_image_t *img, int i, int j);
 void	change(t_map *all, int i, int j);
 void	printmap(char **map, t_map *all);
-void	madatory(t_map *all);
-void	my_keyhook(void *param);
+void	my_keyhook(mlx_key_data_t keydata, void *param);
 char	*reading_map(char *file, t_map *all);
 int		newline(t_map *all);
 int		characters(t_map *all);
@@ -81,7 +81,6 @@ void	backtracking(int xplayer, int yplayer, t_map *all);
 void	validpath(t_map *all);
 void	error_msg(t_map *all);
 void	ismapvalid(t_map *all, char *file);
-void	count(t_map *all);
 char	*ft_itoa(int n);
 int		strlenn(const char *s);
 char	*ft_substr(char *s, int start, int len);
@@ -90,5 +89,21 @@ int		ft_strncmp(const char *s1, const char *s2, int n);
 void	ft_putnbr_fd(int n);
 void	ft_putchar_fd(char c);
 void	allcollec(t_map *all, int x, int y);
+void	mouvements_bonus(int x, int y, t_map *all);
+void	split_map(t_map *all);
 
+//free
+void	free_map(t_map *all);
+void	free_fakemap(t_map *all);
+void	free_one(t_map *all);
+void	free_two(t_map *all);
+void	free_three(t_map *all);
+void	free_four(t_map *all);
+void	free_five(t_map *all);
+void	free_six(t_map *all);
+void	free_seven(t_map *all);
+void	free_eight(t_map *all);
+void	free_nine(t_map *all);
+void	free_ten(t_map *all);
+void	load_images(t_map *all);
 #endif

@@ -6,7 +6,7 @@
 #    By: mel-moun <mel-moun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/24 13:01:04 by mel-moun          #+#    #+#              #
-#    Updated: 2023/03/30 13:00:03 by mel-moun         ###   ########.fr        #
+#    Updated: 2023/07/28 19:24:29 by mel-moun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ CFILES =ft_split.c\
 		solong.c\
 		utils.c\
 		utils1.c\
+		free_images.c\
+		free_images_t.c\
+		map3.c\
+		load_images.c\
 
 CFILES2 = ft_split.c\
 		get_next_line.c\
@@ -40,7 +44,12 @@ CFILES2 = ft_split.c\
 		solong.c\
 		utils.c\
 		utils1.c\
-		
+		bonus_utils.c\
+		free_images.c\
+		free_images_t.c\
+		map3.c\
+		load_images.c\
+
 OBJECTS=$(CFILES:.c=.o)
 OBJECTS2=$(CFILES2:.c=.o)
 

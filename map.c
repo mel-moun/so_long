@@ -6,7 +6,7 @@
 /*   By: mel-moun <mel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:08:52 by mel-moun          #+#    #+#             */
-/*   Updated: 2023/03/25 12:57:21 by mel-moun         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:06:33 by mel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	characters(t_map *all)
 	all->start = 0;
 	all->collec = 0;
 	all->quite = 0;
-	if (newline(all) == 1)
-		return (0);
 	while (all->line[i])
 	{
 		if (all->line[i] == 'P')

@@ -12,38 +12,45 @@
 
 #include "solong.h"
 
-void	madatory(t_map *all)
+void	left_right(mlx_key_data_t keydata, t_map *all)
 {
-	static int	num;
-	int			x;
-	int			y;
-
-	x = all->x - all->xt;
-	y = all->y - all->yt;
-	if (x >= 90 || x <= -90 || y >= 90 || y <= -90)
-	{
-		all->xt = all->x;
-		all->yt = all->y;
-		ft_putnbr_fd(num);
-		ft_putchar_fd('\n');
-		num++;
-	}
+	if (keydata.key == MLX_KEY_LEFT \
+	&& keydata.action == MLX_PRESS && check_step(-15, 0, all))
+		mouvements(-15, 0, all);
+	else if (keydata.key == MLX_KEY_RIGHT \
+	&& keydata.action == MLX_PRESS && check_step(15, 0, all))
+		mouvements(15, 0, all);
+	else if (keydata.key == MLX_KEY_LEFT \
+	&& keydata.action == MLX_REPEAT && check_step(-15, 0, all))
+		mouvements(-15, 0, all);
+	else if (keydata.key == MLX_KEY_RIGHT \
+	&& keydata.action == MLX_REPEAT && check_step(15, 0, all))
+		mouvements(15, 0, all);
 }
 
-void	my_keyhook(void *param)
+void	up_down(mlx_key_data_t keydata, t_map *all)
+{
+	if (keydata.key == MLX_KEY_UP \
+	&& keydata.action == MLX_PRESS && check_step(0, -15, all))
+		mouvements(0, -15, all);
+	else if (keydata.key == MLX_KEY_UP \
+	&& keydata.action == MLX_REPEAT && check_step(0, -15, all))
+		mouvements(0, -15, all);
+	else if (keydata.key == MLX_KEY_DOWN \
+	&& keydata.action == MLX_PRESS && check_step(0, 15, all))
+		mouvements(0, 15, all);
+	else if (keydata.key == MLX_KEY_DOWN \
+	&& keydata.action == MLX_REPEAT && check_step(0, 15, all))
+		mouvements(0, 15, all);
+}
+
+void	my_keyhook(mlx_key_data_t data, void *param)
 {
 	t_map	*all;
 
 	all = param;
-	if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE))
+	if (data.key == MLX_KEY_ESCAPE && data.action == MLX_PRESS)
 		mlx_close_window(all->mlx);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_UP) && check_step(0, -10, all))
-		mouvements(0, -10, all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_DOWN) && check_step(0, 10, all))
-		mouvements(0, 10, all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT) && check_step(-10, 0, all))
-		mouvements(-10, 0, all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT) && check_step(10, 0, all))
-		mouvements(10, 0, all);
-	madatory(all);
+	left_right(data, all);
+	up_down(data, all);
 }
